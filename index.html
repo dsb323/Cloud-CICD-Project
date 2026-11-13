@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Портфолио IT-специалиста: навыки, проекты и контакты. Учебный проект по CI/CD с автоматической публикацией на GitHub Pages.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#4f46e5">
+  <title>Алексей Смирнов — портфолио IT-специалиста</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('cloud-cicd-theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      } catch (error) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header" id="top">
+    <div class="container header__inner">
+      <a class="logo" href="#top" aria-label="На главную">
+        <span class="logo__mark" aria-hidden="true">&lt;/&gt;</span>
+        <span class="logo__text">asmirnov<span class="logo__dot">.</span>dev</span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a class="nav__link" href="#about">Обо мне</a>
+        <a class="nav__link" href="#skills">Навыки</a>
+        <a class="nav__link" href="#projects">Проекты</a>
+        <a class="nav__link" href="#contacts">Контакты</a>
+      </nav>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Переключить тему" aria-pressed="false">
+        <span class="theme-toggle__icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <p class="badge">
+            <span class="badge__dot" aria-hidden="true"></span>
+            Открыт к предложениям
+          </p>
+          <h1 class="hero__title" id="hero-title">
+            Привет, я <span class="gradient-text">Алексей</span><br>
+            Fullstack-разработчик
+          </h1>
+          <p class="hero__lead">
+            Проектирую и собираю веб-приложения: от адаптивной вёрстки до API и баз данных.
+            Автоматизирую доставку кода с помощью CI/CD, чтобы изменения доходили до пользователей
+            быстро и без ручных ошибок.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#projects">Смотреть проекты</a>
+            <a class="btn btn--ghost" href="#contacts">Связаться</a>
+          </div>
+          <dl class="stats">
+            <div class="stats__item">
+              <dt>Опыт</dt>
+              <dd>4+ года</dd>
+            </div>
+            <div class="stats__item">
+              <dt>Проектов</dt>
+              <dd>27</dd>
+            </div>
+            <div class="stats__item">
+              <dt>Технологий</dt>
+              <dd>15</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="code-window">
+            <div class="code-window__bar">
+              <span class="code-window__dot code-window__dot--red"></span>
+              <span class="code-window__dot code-window__dot--yellow"></span>
+              <span class="code-window__dot code-window__dot--green"></span>
+              <span class="code-window__title">deploy.yml</span>
+            </div>
+<pre class="code-window__body"><code><span class="tok-key">name</span>: <span class="tok-str">Deploy to GitHub Pages</span>
+
+<span class="tok-key">on</span>:
+  <span class="tok-key">push</span>:
+    <span class="tok-key">branches</span>: [<span class="tok-str">main</span>]
+
+<span class="tok-key">jobs</span>:
+  <span class="tok-key">build</span>:
+    <span class="tok-key">runs-on</span>: <span class="tok-str">ubuntu-latest</span>
+    <span class="tok-key">steps</span>:
+      - <span class="tok-key">uses</span>: <span class="tok-str">actions/checkout@v7</span>
+      - <span class="tok-key">run</span>: <span class="tok-str">node scripts/check-site.mjs</span>
+      - <span class="tok-key">run</span>: <span class="tok-str">npx html-validate index.html</span>
+
+  <span class="tok-key">deploy</span>:
+    <span class="tok-key">needs</span>: <span class="tok-str">build</span>
+    <span class="tok-key">steps</span>:
+      - <span class="tok-key">uses</span>: <span class="tok-str">actions/deploy-pages@v5</span></code></pre>
+            <div class="code-window__status">
+              <span class="pulse" aria-hidden="true"></span>
+              Pipeline passed · 42s
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <p class="section__eyebrow">01 — Обо мне</p>
+        <h2 class="section__title" id="about-title">Разработка, которую можно проверить</h2>
+
+        <div class="about__grid">
+          <div class="about__text">
+            <p>
+              Меня зовут Алексей. Я занимаюсь веб-разработкой: собираю интерфейсы на HTML, CSS
+              и JavaScript, пишу серверную логику на Node.js и поддерживаю проекты в продакшене.
+              Люблю, когда код не только работает локально, но и предсказуемо доставляется
+              до пользователей.
+            </p>
+            <p>
+              Этот сайт — учебный проект по практической работе «Автоматизация CI/CD для облачных
+              веб-приложений». Каждый push в ветку <code>main</code> запускает GitHub Actions:
+              проверку структуры, валидацию HTML и синтаксиса JavaScript, а затем публикацию
+              на GitHub Pages.
+            </p>
+            <ul class="facts">
+              <li>Пишу код, который проходит автоматические проверки до попадания в main</li>
+              <li>Настраиваю пайплайны сборки и публикации на GitHub Actions</li>
+              <li>Уделяю внимание доступности и адаптивности интерфейсов</li>
+              <li>Работаю по принципу «маленькие изменения — частые релизы»</li>
+            </ul>
+          </div>
+
+          <aside class="panel" aria-label="Текущие задачи">
+            <h3 class="panel__title">Сейчас работаю над</h3>
+            <ul class="timeline">
+              <li class="timeline__item">
+                <span class="timeline__year">2026</span>
+                <p>Перевожу учебные проекты на единый CI/CD-шаблон с проверками и автодеплоем.</p>
+              </li>
+              <li class="timeline__item">
+                <span class="timeline__year">2025</span>
+                <p>Собираю библиотеку переиспользуемых GitHub Actions для статических сайтов.</p>
+              </li>
+              <li class="timeline__item">
+                <span class="timeline__year">2024</span>
+                <p>Освоил контейнеризацию и базовое администрирование Linux-серверов.</p>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <p class="section__eyebrow">02 — Навыки</p>
+        <h2 class="section__title" id="skills-title">Технологии и инструменты</h2>
+        <p class="section__lead">
+          Набор технологий, который я использую в повседневной работе — от вёрстки
+          до автоматизации развёртывания.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">🎨</span>
+            <h3 class="card__title">Frontend</h3>
+            <p class="card__text">Семантическая вёрстка, адаптивные интерфейсы и доступность.</p>
+            <ul class="tags">
+              <li class="tag">HTML5</li>
+              <li class="tag">CSS3</li>
+              <li class="tag">JavaScript</li>
+              <li class="tag">React</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">⚙️</span>
+            <h3 class="card__title">Backend</h3>
+            <p class="card__text">REST API, работа с базами данных и серверная логика.</p>
+            <ul class="tags">
+              <li class="tag">Node.js</li>
+              <li class="tag">Express</li>
+              <li class="tag">PostgreSQL</li>
+              <li class="tag">REST</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">🚀</span>
+            <h3 class="card__title">DevOps</h3>
+            <p class="card__text">Автоматизация сборки, проверок и публикации приложений.</p>
+            <ul class="tags">
+              <li class="tag">Git</li>
+              <li class="tag">GitHub Actions</li>
+              <li class="tag">Docker</li>
+              <li class="tag">Nginx</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">🧪</span>
+            <h3 class="card__title">Качество</h3>
+            <p class="card__text">Проверки, которые ловят ошибки до публикации.</p>
+            <ul class="tags">
+              <li class="tag">html-validate</li>
+              <li class="tag">node --check</li>
+              <li class="tag">Чек-листы</li>
+              <li class="tag">Code Review</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">📐</span>
+            <h3 class="card__title">Дизайн</h3>
+            <p class="card__text">Макеты, дизайн-системы и аккуратная типографика.</p>
+            <ul class="tags">
+              <li class="tag">Figma</li>
+              <li class="tag">UI/UX</li>
+              <li class="tag">Адаптивность</li>
+              <li class="tag">CSS Grid</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <span class="card__icon" aria-hidden="true">🧰</span>
+            <h3 class="card__title">Инструменты</h3>
+            <p class="card__text">Среда разработки и повседневные помощники.</p>
+            <ul class="tags">
+              <li class="tag">VS Code</li>
+              <li class="tag">Linux</li>
+              <li class="tag">npm</li>
+              <li class="tag">Postman</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <p class="section__eyebrow">03 — Проекты</p>
+        <h2 class="section__title" id="projects-title">Избранные работы</h2>
+        <p class="section__lead">
+          Небольшие проекты, в которых я проверял идеи, технологии и подходы к автоматизации.
+        </p>
+
+        <div class="filters" role="group" aria-label="Фильтр проектов">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Все</button>
+          <button class="filter" type="button" data-filter="web" aria-pressed="false">Веб-приложения</button>
+          <button class="filter" type="button" data-filter="bots" aria-pressed="false">Telegram-боты</button>
+          <button class="filter" type="button" data-filter="oss" aria-pressed="false">Open Source</button>
+        </div>
+        <p class="projects__count" id="projects-count" aria-live="polite">Показано 6 из 6 проектов</p>
+
+        <div class="projects" id="projects-grid">
+          <article class="project" data-category="web">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">📝</span>
+              <span class="project__kind">Веб-приложение</span>
+            </div>
+            <h3 class="project__title">Cloud Notes</h3>
+            <p class="project__text">
+              Заметки с поиском, тегами и сохранением в localStorage. Работает офлайн
+              и устанавливается как PWA.
+            </p>
+            <ul class="tags">
+              <li class="tag">JavaScript</li>
+              <li class="tag">LocalStorage</li>
+              <li class="tag">PWA</li>
+            </ul>
+            <details class="project__details">
+              <summary>Подробнее</summary>
+              <p>
+                Реализованы debounce-поиск, фильтрация по тегам и экспорт заметок в JSON.
+                Проект собирается без бэкенда, поэтому его легко публиковать на GitHub Pages.
+              </p>
+            </details>
+          </article>
+
+          <article class="project" data-category="web">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">🎓</span>
+              <span class="project__kind">Веб-приложение</span>
+            </div>
+            <h3 class="project__title">EduSchedule</h3>
+            <p class="project__text">
+              Интерактивное расписание занятий колледжа с фильтрами по группе,
+              преподавателю и дню недели.
+            </p>
+            <ul class="tags">
+              <li class="tag">HTML</li>
+              <li class="tag">CSS Grid</li>
+              <li class="tag">JavaScript</li>
+            </ul>
+            <details class="project__details">
+              <summary>Подробнее</summary>
+              <p>
+                Данные хранятся в JSON и подгружаются через fetch. Интерфейс адаптирован
+                под мобильные устройства и поддерживает тёмную тему.
+              </p>
+            </details>
+          </article>
+
+          <article class="project" data-category="bots">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">🤖</span>
+              <span class="project__kind">Telegram-бот</span>
+            </div>
+            <h3 class="project__title">BookFinder Bot</h3>
+            <p class="project__text">
+              Бот для поиска книг по названию или автору. Показывает описание,
+              рейтинг и ссылку на открытый источник.
+            </p>
+            <ul class="tags">
+              <li class="tag">Node.js</li>
+              <li class="tag">grammY</li>
+              <li class="tag">API</li>
+            </ul>
+            <details class="project__details">
+              <summary>Подробнее</summary>
+              <p>
+                Бот кэширует ответы внешнего API, обрабатывает ошибки сети и ограничивает
+                частоту запросов, чтобы не превышать лимиты.
+              </p>
+            </details>
+          </article>
+
+          <article class="project" data-category="oss">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">📦</span>
+              <span class="project__kind">Open Source</span>
+            </div>
+            <h3 class="project__title">Deploy Kit</h3>
+            <p class="project__text">
+              Набор готовых workflow для GitHub Actions: проверка HTML, линт JavaScript
+              и публикация статического сайта.
+            </p>
+            <ul class="tags">
+              <li class="tag">GitHub Actions</li>
+              <li class="tag">YAML</li>
+              <li class="tag">CI/CD</li>
+            </ul>
+            <details class="project__details">
+              <summary>Подробнее</summary>
+              <p>
+                Шаблоны используют минимальные права токена, кэширование зависимостей
+                и отдельные job для сборки и публикации. Подходят для проектных сайтов
+                и документации.
+              </p>
+            </details>
+          </article>
+
+          <article class="project" data-category="web">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">💼</span>
+              <span class="project__kind">Веб-приложение</span>
+            </div>
+            <h3 class="project__title">Portfolio 2.0</h3>
+            <p class="project__text">
+              Этот сайт: статическое портфолио с тёмной темой, фильтром проектов
+              и автоматической публикацией.
+            </p>
+            <ul class="tags">
+              <li class="tag">HTML</li>
+              <li class="tag">CSS</li>
+              <li class="tag">GitHub Pages</li>
+            </ul>
+            <details class="project__details">
+              <summary>Подробнее</summary>
+              <p>
+                Каждый push в main проходит проверку структуры проекта, валидацию HTML
+                и публикуется на GitHub Pages через официальные actions.
+              </p>
+            </details>
+          </article>
+
+          <article class="project" data-category="oss">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">🌤️</span>
+              <span class="project__kind">Open Source</span>
+            </div>
+            <h3 class="project__title">Weather CLI</h3>
+            <p class="project__text">
+              Консольная утилита на Node.js, которая показывает текущую погоду
+              и прогноз на три дня.
+            </p>
+            <ul class="tags">
+              <li class="tag">Node.js</li>
+              <li class="tag">CLI</li>
+              <li class="tag">OpenWeather API</li>
+            </ul>
+            <details class="project__details">
+              <summary>Подробнее</summary>
+              <p>
+                Утилита поддерживает кэширование, цветной вывод в терминале и конфигурацию
+                через переменные окружения. Покрыта базовыми тестами.
+              </p>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="contacts" aria-labelledby="contacts-title">
+      <div class="container">
+        <p class="section__eyebrow">04 — Контакты</p>
+        <h2 class="section__title" id="contacts-title">Давайте работать вместе</h2>
+        <p class="section__lead">
+          Открыт к стажировкам, проектной работе и обсуждению идей. Напишите — отвечу
+          в течение рабочего дня.
+        </p>
+
+        <div class="contact__grid">
+          <div class="contact__info">
+            <ul class="contact-list">
+              <li class="contact-list__item">
+                <span class="contact-list__label">Email</span>
+                <a href="mailto:student@example.com">student@example.com</a>
+              </li>
+              <li class="contact-list__item">
+                <span class="contact-list__label">GitHub</span>
+                <a href="https://github.com/">github.com/your-username</a>
+              </li>
+              <li class="contact-list__item">
+                <span class="contact-list__label">Telegram</span>
+                <a href="https://t.me/">@your_username</a>
+              </li>
+              <li class="contact-list__item">
+                <span class="contact-list__label">Город</span>
+                <span>Казань, UTC+3</span>
+              </li>
+            </ul>
+            <p class="contact__note">
+              Контакты в этом шаблоне — заглушки. Замените их на свои перед публикацией.
+            </p>
+          </div>
+
+          <form class="contact-form" id="contact-form" novalidate>
+            <h3 class="contact-form__title">Написать сообщение</h3>
+
+            <div class="field">
+              <label class="field__label" for="name">Имя</label>
+              <input class="field__input" id="name" name="name" type="text"
+                     autocomplete="name" placeholder="Иван Петров" required minlength="2"
+                     aria-describedby="name-error">
+              <p class="field__error" id="name-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="email">Email</label>
+              <input class="field__input" id="email" name="email" type="email"
+                     autocomplete="email" placeholder="ivan@example.com" required
+                     aria-describedby="email-error">
+              <p class="field__error" id="email-error" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="message">Сообщение</label>
+              <textarea class="field__input field__input--area" id="message" name="message"
+                        rows="5" placeholder="Расскажите о задаче или предложении" required
+                        minlength="10" aria-describedby="message-error"></textarea>
+              <p class="field__error" id="message-error" aria-live="polite"></p>
+            </div>
+
+            <button class="btn btn--primary btn--wide" type="submit">Отправить</button>
+            <p class="form-status" id="form-status" role="status"></p>
+            <p class="contact-form__hint">
+              Демо-форма: данные не отправляются на сервер, а проверяются на стороне браузера.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <p>© <span id="year">2026</span> Алексей Смирнов · Учебный проект Cloud-CICD-Project</p>
+      <p class="footer__meta">
+        <span class="status-dot" aria-hidden="true"></span>
+        Собрано и опубликовано через GitHub Actions
+      </p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Вернуться наверх" hidden>↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="400" viewBox="0 0 1240 400" role="img" aria-labelledby="pipeline-title pipeline-desc">
+  <title id="pipeline-title">Схема CI/CD Pipeline проекта Cloud-CICD-Project</title>
+  <desc id="pipeline-desc">Push в main запускает проверки, сборку артефакта и публикацию на GitHub Pages. При ошибке проверок деплой не выполняется.</desc>
+
+  <defs>
+    <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0d1424" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#6366f1"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <rect width="1240" height="400" rx="20" fill="#f7f8fd"/>
+  <rect x="1" y="1" width="1238" height="398" rx="20" fill="none" stroke="#e2e6f3"/>
+
+  <text x="30" y="38" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#0d1424">CI/CD Pipeline проекта Cloud-CICD-Project</text>
+  <text x="30" y="59" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#5a6478">GitHub Actions · статический сайт · GitHub Pages</text>
+
+  <!-- Соединительные стрелки -->
+  <g stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)" fill="none">
+    <line x1="200" y1="128" x2="216" y2="128"/>
+    <line x1="398" y1="128" x2="414" y2="128"/>
+    <line x1="596" y1="128" x2="612" y2="128"/>
+    <line x1="794" y1="128" x2="810" y2="128"/>
+    <line x1="992" y1="128" x2="1008" y2="128"/>
+  </g>
+
+  <!-- Этап 1 -->
+  <g filter="url(#card-shadow)">
+    <rect x="24" y="80" width="176" height="96" rx="14" fill="#ffffff" stroke="#dfe4f4"/>
+    <rect x="24" y="80" width="6" height="96" rx="3" fill="#6366f1"/>
+  </g>
+  <text x="48" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0d1424">Разработчик</text>
+  <text x="48" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4f46e5">git push</text>
+  <text x="48" y="153" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">коммит изменений</text>
+
+  <!-- Этап 2 -->
+  <g filter="url(#card-shadow)">
+    <rect x="222" y="80" width="176" height="96" rx="14" fill="#ffffff" stroke="#dfe4f4"/>
+    <rect x="222" y="80" width="6" height="96" rx="3" fill="#6366f1"/>
+  </g>
+  <text x="246" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0d1424">GitHub</text>
+  <text x="246" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#4f46e5">ветка main</text>
+  <text x="246" y="153" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">событие on: push</text>
+
+  <!-- Этап 3: build -->
+  <g filter="url(#card-shadow)">
+    <rect x="420" y="80" width="176" height="96" rx="14" fill="#eef2ff" stroke="#a5b4fc"/>
+    <rect x="420" y="80" width="176" height="24" rx="14" fill="#e0e7ff"/>
+    <rect x="420" y="94" width="176" height="10" fill="#e0e7ff"/>
+  </g>
+  <text x="432" y="97" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#4338ca" letter-spacing="1">CI · BUILD</text>
+  <text x="444" y="126" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0d1424">Проверки и сборка</text>
+  <text x="444" y="146" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">HTML · JS · ссылки · _site</text>
+  <text x="444" y="164" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">артефакт для деплоя</text>
+
+  <!-- Этап 4: deploy -->
+  <g filter="url(#card-shadow)">
+    <rect x="618" y="80" width="176" height="96" rx="14" fill="#ecfeff" stroke="#67e8f9"/>
+    <rect x="618" y="80" width="176" height="24" rx="14" fill="#cffafe"/>
+    <rect x="618" y="94" width="176" height="10" fill="#cffafe"/>
+  </g>
+  <text x="630" y="97" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" fill="#0e7490" letter-spacing="1">CD · DEPLOY</text>
+  <text x="642" y="126" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0d1424">Публикация</text>
+  <text x="642" y="146" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">deploy-pages@v5</text>
+  <text x="642" y="164" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">только после build</text>
+
+  <!-- Этап 5 -->
+  <g filter="url(#card-shadow)">
+    <rect x="816" y="80" width="176" height="96" rx="14" fill="#ffffff" stroke="#dfe4f4"/>
+    <rect x="816" y="80" width="6" height="96" rx="3" fill="#0891b2"/>
+  </g>
+  <text x="840" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0d1424">GitHub Pages</text>
+  <text x="840" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#0e7490">HTTPS + CDN</text>
+  <text x="840" y="153" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">публичный URL</text>
+
+  <!-- Этап 6 -->
+  <g filter="url(#card-shadow)">
+    <rect x="1014" y="80" width="176" height="96" rx="14" fill="#ffffff" stroke="#dfe4f4"/>
+    <rect x="1014" y="80" width="6" height="96" rx="3" fill="#0891b2"/>
+  </g>
+  <text x="1038" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#0d1424">Пользователь</text>
+  <text x="1038" y="132" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#0e7490">открывает сайт</text>
+  <text x="1038" y="153" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">видит новую версию</text>
+
+  <!-- Ветка ошибки -->
+  <path d="M508 176 L508 224" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 5" fill="none" marker-end="url(#arrow-red)"/>
+  <g>
+    <rect x="330" y="230" width="560" height="64" rx="12" fill="#fef2f2" stroke="#fca5a5"/>
+    <circle cx="358" cy="262" r="12" fill="#fee2e2"/>
+    <text x="354" y="267" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#dc2626">!</text>
+    <text x="380" y="257" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#b91c1c">Проверки не пройдены — pipeline завершается с ошибкой</text>
+    <text x="380" y="277" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#991b1b">job deploy не запускается, на сайте остаётся предыдущая рабочая версия</text>
+  </g>
+
+  <!-- Нижняя сноска -->
+  <text x="30" y="348" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">Триггер: push в main · Права: contents: read → pages: write, id-token: write · Артефакт: каталог _site</text>
+  <text x="30" y="368" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#5a6478">Инструменты: actions/checkout · html-validate · node --check · upload-pages-artifact · deploy-pages</text>
+</svg>

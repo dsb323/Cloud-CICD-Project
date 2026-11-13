@@ -1,0 +1,78 @@
+name: CI/CD — проверка и публикация сайта
+
+# Workflow запускается при каждом push в main и вручную из вкладки Actions.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Минимальные права по умолчанию: код только читается.
+permissions:
+  contents: read
+
+# Одновременно выполняется только одна публикация, чтобы не перезаписать сайт.
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  # ------------------------------------------------------------------
+  # Этап 1. Сборка и проверки. Публикация начнётся только при успехе.
+  # ------------------------------------------------------------------
+  build:
+    name: Проверка и сборка
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Получение исходного кода
+        uses: actions/checkout@v7
+
+      - name: Настройка Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+
+      - name: Проверка структуры и содержимого сайта
+        run: node scripts/check-site.mjs
+
+      - name: Проверка синтаксиса JavaScript
+        run: node --check script.js
+
+      - name: Валидация HTML
+        run: npx --yes html-validate@11.21.1 index.html
+
+      - name: Сборка артефакта для GitHub Pages
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp index.html style.css script.js favicon.svg _site/
+          if [ -d assets ]; then
+            cp -R assets _site/
+          fi
+          echo "Файлы, которые попадут на сайт:"
+          find _site -maxdepth 2 -type f -printf '%P\n' | sort
+
+      - name: Загрузка артефакта
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  # ------------------------------------------------------------------
+  # Этап 2. Публикация проверенного артефакта на GitHub Pages.
+  # ------------------------------------------------------------------
+  deploy:
+    name: Публикация на GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Развёртывание сайта
+        id: deployment
+        uses: actions/deploy-pages@v5
